@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import getAuthorization from './endpoints/api_endpoints';
+import axios from 'axios';
 var cors = require('cors');
 
 // use it before all route definitions
@@ -22,9 +23,18 @@ middlewareConfig(app);
 //routes below
 
 const cb = (req, res) => {
-  // var json = JSON.parse(res.body);
-  // console.log("Access Token:", json.access_token);
-  console.log("CALLLBACKLSDNFINEFL:KSENKLSEN");
+  console.log(req.query.code);
+  return axios.post(`https://genomicexplorer.io/oauth/token?client_id=ACkyELWzOItMLBaG6qsJ9Ew7z4uTKa9EJw6kNuWq&client_secret=9VOfeIEWrYfw1OlZHLrJBfpaqRTUeJQD5DLIpNXFupa1TFx8srIZAEk9DcEvOPaeLXGpHajDC27i92rWwHvd8OewrcRv2Fl1dYwpwa9x8G0ojRnlMKfwNUsstCUA8Tni&grant_type=authorization_code&code=${req.query.code}&redirect_uri=http://127.0.0.1:5000/callback&scope=report:eye-color`,
+  {
+  method: 'POST',
+        // headers: {
+        //   'Access-Control-Allow-Origin': '*',
+        //   'Accept': 'application/x-www-form-urlencoded',
+        //   'Content-Type': 'application/x-www-form-urlencoded',
+        // },
+        // mode: 'no-cors',
+      }
+);
 };
 
 
